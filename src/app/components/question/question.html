@@ -1,0 +1,11 @@
+<div class="question-card">
+  <h2>{{ question.name }}</h2>
+  <div class="options-container">
+    <app-option
+      *ngFor="let option of question.options"
+      [option]="option"
+      [isSelected]="isSelected(option.id)"
+      (click)="onOptionClick(option.id)"
+    ></app-option>
+  </div>
+</div>

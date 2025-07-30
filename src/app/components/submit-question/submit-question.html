@@ -1,0 +1,17 @@
+<div class="submit-question-card">
+  <h3>{{ question.name }}</h3>
+  <div class="options-display">
+    <div *ngFor="let option of question.options" class="option-item"
+      [class.selected]="selectedOptionId === option.id"
+      [class.correct]="option.isAnswer && isCorrect()"
+      [class.incorrect]="selectedOptionId === option.id && !isCorrect()"
+    >
+      {{ option.name }}
+      <span *ngIf="option.isAnswer" class="correct-answer-indicator">(Correct Answer)</span>
+      <span *ngIf="selectedOptionId === option.id && !isCorrect()" class="your-answer-indicator">(Your Answer)</span>
+    </div>
+  </div>
+  <p *ngIf="selectedOptionId === null">Your Answer: Not answered</p>
+  <p *ngIf="selectedOptionId !== null && !isCorrect()" class="incorrect-feedback">Incorrect. The correct answer was: {{ getCorrectAnswer()?.name }}</p>
+  <p *ngIf="selectedOptionId !== null && isCorrect()" class="correct-feedback">Correct!</p>
+</div>

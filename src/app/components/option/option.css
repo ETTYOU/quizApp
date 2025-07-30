@@ -1,0 +1,18 @@
+.option-card {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.option-card:hover {
+  background-color: #f0f0f0;
+}
+
+.option-card.selected {
+  background-color: #e0f7fa;
+  border-color: #00bcd4;
+  font-weight: bold;
+}

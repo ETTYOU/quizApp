@@ -1,0 +1,12 @@
+<div class="pagination-controls">
+  <button (click)="onPrev()" [disabled]="currentIndex === 0">Previous</button>
+  <ng-container *ngFor="let page of pageNumbers">
+    <button
+      (click)="onGoTo(page)"
+      [class.active]="currentIndex === page"
+    >
+      {{ page + 1 }}
+    </button>
+  </ng-container>
+  <button (click)="onNext()" [disabled]="currentIndex === totalQuestions - 1">Next</button>
+</div>

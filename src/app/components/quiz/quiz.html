@@ -1,0 +1,48 @@
+<div class="quiz-container">
+  <div class="mode-buttons">
+    <button (click)="showQuiz()" [class.active]="quizMode === 'quiz'">Quiz</button>
+    <button (click)="showReview()" [class.active]="quizMode === 'review'">Review</button>
+    <button (click)="showSubmit()" [class.active]="quizMode === 'submit'">Submit</button>
+  </div>
+
+  <div *ngIf="quizMode === 'quiz'">
+    <div class="progress-bar-container">
+      <div class="progress-bar" [style.width]="progress + '%'"></div>
+    </div>
+
+    <div class="question-display">
+      <app-question
+        [question]="currentQuestion"
+        [selectedOptionId]="selectedAnswers[currentQuestion.id]"
+        (optionSelected)="onOptionSelected($event)"
+      ></app-question>
+    </div>
+
+    <app-pagination
+      [totalQuestions]="questions.length"
+      [currentIndex]="currentQuestionIndex"
+      (goTo)="goToQuestion($event)"
+      (next)="nextQuestion()"
+      (prev)="previousQuestion()"
+    ></app-pagination>
+  </div>
+
+  <div *ngIf="quizMode === 'review'" class="review-mode">
+    <h2>Review Quiz</h2>
+    <div *ngFor="let question of questions; let i = index" class="review-question-item">
+      <h3>{{ i + 1 }}. {{ question.name }}</h3>
+      <p>Your Answer: {{ getSelectedOptionName(question) }}</p>
+      <p>Correct Answer: {{ getCorrectAnswer(question)?.name }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="quizMode === 'submit'" class="submit-mode">
+    <h2>Quiz Results</h2>
+    <div *ngFor="let question of questions; let i = index">
+      <app-submit-question
+        [question]="question"
+        [selectedOptionId]="selectedAnswers[question.id]"
+      ></app-submit-question>
+    </div>
+  </div>
+</div>
